@@ -20,21 +20,21 @@ class SampleUnitTest extends UnitSpec {
       }
     }
 
-  "The service" should {
+  describe("The service") {
 
-    "return a greeting for GET requests to the root path" in {
+    it("return a greeting for GET requests to the root path") {
       Get() ~> Route.seal(testRoute) ~> check {
         responseAs[String] shouldEqual "The requested resource could not be found."
       }
     }
 
-    "return a 'Test is successful!' response for GET requests to /test" in {
+    it("return a 'Test is successful!' response for GET requests to /test") {
       Get("/test") ~> testRoute ~> check {
         responseAs[String] shouldEqual "Test is successful!"
       }
     }
 
-    "return PUT method not allowed" in {
+    it("return PUT method not allowed") {
       Put() ~> Route.seal(testRoute) ~> check {
         status shouldEqual StatusCodes.MethodNotAllowed
         responseAs[String] shouldEqual "HTTP method not allowed, supported methods: GET"
